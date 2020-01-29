@@ -3,29 +3,84 @@ var inquirer = require('inquirer');
 
 
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'me',
-  password : 'secret',
-  database : 'my_db'
+  host: 'localhost',
+  user: 'root',
+  port: 3306,
+  password: 'secret',
+  database: 'bamazon_db'
 });
- 
+
 connection.connect();
- 
+
 connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
   if (error) throw error;
   console.log('The solution is: ', results[0].solution);
-    start();
+  start();
 });
 
-function start() {
-    inquirer
+function productID() {
+  inquirer
     .prompt([
       /* Pass your questions in here */
+      // The first should ask them the ID of the product they would like to buy.
+      name: "id",
+      type: "number",
+      message: "What is the IF of the product you would like to purchase?"
     ])
     .then(answers => {
-      // Use user feedback for... whatever!!
+      // Once the customer has placed the order, your application should check if your store has enough of the product to meet the customer's request.
+      var query = "SELECT item-id FROM products WHERE ?";
+      connection.query(query, { item_id: answer.item_id }, function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+          console.log("Product: " + res[i].product_name);
+          // If not, the app should log a phrase like Insufficient quantity!, and then prevent the order from going through.
+
+        } if(!item_id) {
+          console.log("Insufficiant answer");
+        }
+
+      // However, if your store does have enough of the product, you should fulfill the customer's order.
+      // This means updating the SQL database to reflect the remaining quantity.
+
+      ???????
+
+          // Once the update goes through, show the customer the total cost of their purchase.
+          productID();
+      });
+    }
+
+
+function unitsOfProduct() {
+  inquirer
+    .prompt([
+      /* Pass your questions in here */
+      // The second message should ask how many units of the product they would like to buy
+      name:"id",
+      type:"number",
+      message:"How many units of the product would you like to purchase?"
+      ])
+    .then(answers => {
+      // Once the customer has placed the order, your application should check if your store has enough of the product to meet the customer's request.
+      var query = "SELECT stock_quantity FROM products WHERE ?";
+      connection.query(query, { stock_quantity: answer.stock_quantity }, function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+          console.log("Left in Stock " + res[i].stock_quantity);
+          // If not, the app should log a phrase like Insufficient quantity!, and then prevent the order from going through.
+
+        } if (stock_quantity === 0) {
+          console.log("Insufficiant answer");
+        }
+
+      // However, if your store does have enough of the product, you should fulfill the customer's order.
+      // This means updating the SQL database to reflect the remaining quantity.
+
+      ????????
+
+      // Once the update goes through, show the customer the total cost of their purchase.
+
     });
 }
-
  
 connection.end();
