@@ -58,14 +58,17 @@ function productID() {
         } if (!item_id) {
           console.log("Insufficiant answer");
         }
-
+        productID();
       // However, if your store does have enough of the product, you should fulfill the customer's order.
       // This means updating the SQL database to reflect the remaining quantity.
 
-      ???????
+      //create a function that targets the item_id that was selected and subract from the quantity of that product
+      function selectedItem() {
+        
+      }
 
           // Once the update goes through, show the customer the total cost of their purchase.
-          productID();
+       
       });
     }
 
