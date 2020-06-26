@@ -42,3 +42,9 @@ VALUES ("Pearl White Gold Ring", "Jewelry", 9.19, 18);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Infinity Silver Bracelet", "Jewelry", 14.12, 12);
+
+SELECT * FROM products WHERE item_id = 1;
+
+UPDATE products
+SET stock_quantity = 10
+WHERE item_id = 1;

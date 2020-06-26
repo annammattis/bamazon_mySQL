@@ -67,8 +67,8 @@ function productID() {
 
       //create a function that targets the item_id that was selected and subract from the quantity of that product
       function selectedItem(item_id) {
-        // query = "SELECT * FROM products WHERE item_id ?":
-        // connection.query(query, { item_id: answer.item_id }, function (err, res))
+        query = "SELECT * FROM products WHERE item_id ?";
+        connection.query(query, { item_id: answer.item_id }, function (err, res))
       }
 
           // Once the update goes through, show the customer the total cost of their purchase.
